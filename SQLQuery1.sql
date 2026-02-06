@@ -2,7 +2,8 @@
 --select
 --coffee_name as product_name,
 --sum(quantity)as quantity,
---«ﬂÀ— «·„‰ Ã«  „»Ì⁄«  ›Ì ÌÊ„ Ê«Õœ
+
+--Top-Selling Products on a Single Day
 SELECT  coffee_name AS product_name,
  SUM(quantity) AS total_quantity,
   SUM(total) AS total_price,
@@ -12,7 +13,7 @@ FROM coffeshop
 GROUP BY  date, coffee_name,
 time_of_day
 order by total_price desc;
---«ﬂÀ— «·„‰ Ã«  „»Ì⁄«  ›Ì ÌÊ„ 
+--Top-Selling Products in a Day
 SELECT  coffee_name AS product_name,
  SUM(quantity) AS total_quantity,
   SUM(total) AS total_price,
@@ -23,7 +24,7 @@ where date='2024-10-02'
 GROUP BY  date, coffee_name,
 time_of_day
 order by total_price desc;
--- «ﬂÀ— «·„‰ Ã«  „»Ì⁄« Õ”» «·‘› 
+--Top-Selling Products by Shift
 SELECT
   coffee_name AS product_name,
   SUM(quantity) AS total_quantity,
@@ -34,8 +35,9 @@ WHERE coffee_name IN ('latte', 'hot chocolate', 'americano')
 GROUP BY coffee_name,Time_of_Day
 order by total_price  desc 
 
--- «·›—ﬁ »Ì‰ «·«‘Â—
-WITH monthly_sales AS (
+--Best-Selling Month
+
+ WITH monthly_sales AS (
   SELECT
     coffee_name,
     YEAR(Date) AS year,
@@ -64,7 +66,8 @@ SELECT
 FROM monthly_sales
 where coffee_name = 'latte' ;
 
--- «·‘Â— «·«ﬂÀ— „»Ì⁄«
+-- Highest Growth Month
+
 
 WITH monthly_sales AS (
   SELECT
@@ -82,7 +85,7 @@ SELECT TOP 1
 FROM monthly_sales
 ORDER BY total_sales DESC;
 
---- «·«ﬂÀ— ‰„Ê
+--- √á√°√á√ü√ã√ë √§√£√¶
 
 WITH monthly_sales AS (
   SELECT
@@ -145,5 +148,6 @@ SELECT TOP 1
 FROM lagged_sales
 WHERE prev_month_sales IS NOT NULL
 ORDER BY growth_value DESC;
+
 
 
